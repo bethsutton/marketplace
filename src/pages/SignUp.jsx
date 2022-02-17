@@ -10,6 +10,7 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { db } from '../firebase.config';
+import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -48,6 +49,15 @@ function SignUp() {
         displayName: name,
       });
 
+      // MAKE COPY OF FORM DATA FROM STATE
+      const formDataCopy = { ...formData };
+      // DELETE PASSWORD
+      delete formDataCopy.password;
+      // SET TIMESTAMP TO SERVER TIMESTAMP
+      formDataCopy.timestamp = serverTimestamp();
+      // UPDATE DATABASE AND ADD USER TO USERS COLLECTION
+      await setDoc(doc(db, 'users', user.uid), formDataCopy);
+
       navigate('/');
     } catch (error) {
       console.log(error);
@@ -84,7 +94,7 @@ function SignUp() {
             <div className="passwordInputDiv">
               <input
                 type={showPassword ? 'text' : 'password'}
-                class="passwordInput"
+                className="passwordInput"
                 placeholder="Password"
                 id="password"
                 value={password}
