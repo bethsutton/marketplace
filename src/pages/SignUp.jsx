@@ -53,7 +53,7 @@ function SignUp() {
       const formDataCopy = { ...formData };
       // DELETE PASSWORD
       delete formDataCopy.password;
-      // SET TIMESTAMP TO SERVER TIMESTAMP
+      // ADD TIMESTAMP AND SET TO SERVER TIMESTAMP
       formDataCopy.timestamp = serverTimestamp();
       // UPDATE DATABASE AND ADD USER TO USERS COLLECTION
       await setDoc(doc(db, 'users', user.uid), formDataCopy);
