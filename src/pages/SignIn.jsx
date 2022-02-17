@@ -43,7 +43,7 @@ function SignIn() {
             <div className="passwordInputDiv">
               <input
                 type={showPassword ? 'text' : 'password'}
-                class="passwordInput"
+                className="passwordInput"
                 placeholder="Password"
                 id="password"
                 value={password}
