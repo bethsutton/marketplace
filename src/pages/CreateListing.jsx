@@ -105,7 +105,7 @@ function CreateListing() {
           ? undefined
           : data.results[0]?.formatted_address;
 
-      console.log(geolocation, location);
+      // console.log(geolocation, location);
 
       if (location === undefined || location.includes('undefined')) {
         setLoading(false);
